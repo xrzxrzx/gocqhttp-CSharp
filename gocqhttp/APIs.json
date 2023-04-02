@@ -1,0 +1,19 @@
+[
+  {
+    "name": "send_group_msg",
+    "params": [
+      "group_id",
+      "message",
+      "auto_escape"
+    ]
+  },
+  {
+    "name": "send_private_msg",
+    "params": [
+      "user_id",
+      "group_id",
+      "message",
+      "auto_escape"
+    ]
+  }
+] 
