@@ -8,5 +8,11 @@
     <Setting Name="Port" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">8080</Value>
     </Setting>
+    <Setting Name="ConfigFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="GocqhttpFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

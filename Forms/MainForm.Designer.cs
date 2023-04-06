@@ -38,9 +38,9 @@
             this.TabControl = new System.Windows.Forms.TabControl();
             this.FunctionPage = new System.Windows.Forms.TabPage();
             this.QQPage = new System.Windows.Forms.TabPage();
+            this.RobotPage = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.RobotPage = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.SuspendLayout();
@@ -68,8 +68,9 @@
             // gocqhttp设置ToolStripMenuItem
             // 
             this.gocqhttp设置ToolStripMenuItem.Name = "gocqhttp设置ToolStripMenuItem";
-            this.gocqhttp设置ToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
-            this.gocqhttp设置ToolStripMenuItem.Text = "gocqhttp设置";
+            this.gocqhttp设置ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.gocqhttp设置ToolStripMenuItem.Text = "机器人设置";
+            this.gocqhttp设置ToolStripMenuItem.Click += new System.EventHandler(this.gocqhttp设置ToolStripMenuItem_Click);
             // 
             // 关于ToolStripMenuItem
             // 
@@ -131,14 +132,23 @@
             this.QQPage.Text = "QQ功能";
             this.QQPage.UseVisualStyleBackColor = true;
             // 
+            // RobotPage
+            // 
+            this.RobotPage.Location = new System.Drawing.Point(4, 29);
+            this.RobotPage.Name = "RobotPage";
+            this.RobotPage.Size = new System.Drawing.Size(228, 478);
+            this.RobotPage.TabIndex = 2;
+            this.RobotPage.Text = "机器人功能";
+            this.RobotPage.UseVisualStyleBackColor = true;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 20);
+            this.label1.Size = new System.Drawing.Size(69, 20);
             this.label1.TabIndex = 3;
-            this.label1.Text = "label1";
+            this.label1.Text = "日志输出";
             // 
             // button1
             // 
@@ -148,15 +158,6 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // RobotPage
-            // 
-            this.RobotPage.Location = new System.Drawing.Point(4, 29);
-            this.RobotPage.Name = "RobotPage";
-            this.RobotPage.Size = new System.Drawing.Size(228, 478);
-            this.RobotPage.TabIndex = 2;
-            this.RobotPage.Text = "机器人功能";
-            this.RobotPage.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 

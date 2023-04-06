@@ -15,5 +15,20 @@
       "message",
       "auto_escape"
     ]
+  },
+  {
+    "name": "get_login_info",
+    "params": [
+    ]
+  },
+  {
+    "name": "set_qq_profile",
+    "params": [
+      "nickname",
+      "company",
+      "email",
+      "college",
+      "personal_note"
+    ]
   }
 ] 

@@ -40,7 +40,13 @@ namespace gocqhttp_CSharp.gocqhttp
         /// </summary>
         /// <param name="message"></param>
         public void Send(string message) => webSocket.Send(message);
+        /// <summary>
+        /// 连接gocqhttp
+        /// </summary>
         public void Connect() => webSocket.Connect();
+        /// <summary>
+        /// 断开与gocqhttp的连接
+        /// </summary>
         public void Disconnect() => webSocket.Close();
         
 
