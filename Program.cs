@@ -1,4 +1,6 @@
+using gocqhttp_CSharp.common;
 using gocqhttp_CSharp.Forms;
+using gocqhttp_CSharp.gocqhttp;
 
 namespace gocqhttp_CSharp
 {
@@ -13,7 +15,9 @@ namespace gocqhttp_CSharp
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm());
+            MainForm mainForm = new MainForm();
+            Log.SetOutDomain(mainForm);
+            Application.Run(mainForm);
         }
     }
 }

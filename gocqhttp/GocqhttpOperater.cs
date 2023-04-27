@@ -12,17 +12,17 @@ namespace gocqhttp_CSharp.gocqhttp
     {
         private WebSocketSharp.WebSocket webSocket;
         private string? ApiFilePath = null;
+        private AppSetting setting;
 
         public delegate void MessageArriveHandler(string message);
 
-        public void SetWebsocket(string IP, int Port, MessageArriveHandler messageArrive)
+        public GocqhttpOperater()
         {
-            if (IP == null)
-            {
-                throw new ArgumentNullException(nameof(IP));
-            }
-
-            webSocket = new WebSocket("ws://" + IP + ":" + Port.ToString());
+            setting = new AppSetting();
+            webSocket = new WebSocket("ws://" + setting.IP + ":" + setting.Port.ToString());
+        }
+        public void SetWebsocket(MessageArriveHandler messageArrive)
+        {
             webSocket.OnMessage += (sender, e) =>
             {
                 messageArrive(e.Data);
@@ -34,7 +34,6 @@ namespace gocqhttp_CSharp.gocqhttp
             get { return ApiFilePath; }
             set { ApiFilePath = value; }
         }
-
         /// <summary>
         /// 向gocqhttp发送数据
         /// </summary>
@@ -43,12 +42,15 @@ namespace gocqhttp_CSharp.gocqhttp
         /// <summary>
         /// 连接gocqhttp
         /// </summary>
-        public void Connect() => webSocket.Connect();
+        public void Connect()
+        {
+            setting.Reload();
+            webSocket = new WebSocket("ws://" + setting.IP + ":" + setting.Port.ToString());
+            webSocket.Connect();
+        }
         /// <summary>
         /// 断开与gocqhttp的连接
         /// </summary>
         public void Disconnect() => webSocket.Close();
-        
-
     }
 }

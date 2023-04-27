@@ -101,6 +101,7 @@
             this.Controls.Add(this.label1);
             this.Name = "RobotSettingForm";
             this.Text = "RobotSettingForm";
+            this.Load += new System.EventHandler(this.RobotSettingForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

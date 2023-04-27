@@ -9,6 +9,9 @@ using System.Web;
 using Newtonsoft.Json;
 using System.Reflection.Metadata.Ecma335;
 using gocqhttp_CSharp.gocqhttp.JSON;
+using System.Threading;
+using System.Text.Json.Nodes;
+using gocqhttp_CSharp.common;
 
 namespace gocqhttp_CSharp.gocqhttp
 {
@@ -32,8 +35,8 @@ namespace gocqhttp_CSharp.gocqhttp
         /// <summary>
         /// 加载API文件
         /// </summary>
-        /// <exception cref="FileNotFoundException"></exception>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="FileNotFoundException">未找到API文件</exception>
+        /// <exception cref="ArgumentNullException">读取API文件出现异常</exception>
         private void LoadAPIFile()
         {
             APINode[]? APINodes;
@@ -60,13 +63,17 @@ namespace gocqhttp_CSharp.gocqhttp
             }
         }
 
-        ///<summary>
-        ///
+        /// <summary>
+        /// 发送API数据
         /// </summary>
-        public void SendAPI(string name, params object[] values)
+        /// <param name="name">API名（终结点）</param>
+        /// <param name="values">API所有参数</param>
+        /// <exception cref="Exception">未知API</exception>
+        public JsonObject? SendAPI(string name, params object[] values)
         {
-
+            ManualResetEvent manualResetEvent= new ManualResetEvent(false);
             string sendString;
+            JsonObject? recvData;
             List<string> APIParams;
             API_JSON json = new API_JSON(name);
 
@@ -74,6 +81,10 @@ namespace gocqhttp_CSharp.gocqhttp
             if(APIs.ContainsKey(name))
             {
                 APIParams = APIs[name];
+                if(APIParams.Count > values.Length)
+                {
+                    Log.Warn("API “" + name + "” 参数过少");
+                }
                 int i = 0;
                 foreach (string param in APIParams)
                 {
@@ -85,13 +96,21 @@ namespace gocqhttp_CSharp.gocqhttp
             }
             else
             {
-                throw new Exception("未知API");
+                Log.Warn("未知API");
             }
             
             //转换成JSON字符串
+            json.Echo = Gocqhttp.GetEcho(manualResetEvent);
             sendString = JsonConvert.SerializeObject(json);
 
-            operater.Send(sendString);
+            operater.Send(sendString);//发送
+            //休眠（至多3秒），并等待被唤醒
+            manualResetEvent.WaitOne(TimeSpan.FromSeconds(3), true);
+            if((recvData = Gocqhttp.GetApiReturnData()) == null)
+            {
+                Log.Warn("API：" + name + " 调用失败");
+            }
+            return recvData;
         }
     }
 
@@ -106,9 +125,10 @@ namespace gocqhttp_CSharp.gocqhttp
             private List<API_Param> @params;
             public API_JSON(string action)
             {
+                @params= new List<API_Param>();
                 this.action = action;
             }
-
+            public string? Echo { set; get; }
             public void Add(API_Param param) => @params.Add(param);
             public List<API_Param> GetParams() => @params;
         }

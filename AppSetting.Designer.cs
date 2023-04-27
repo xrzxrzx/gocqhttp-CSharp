@@ -70,5 +70,29 @@ namespace gocqhttp_CSharp {
                 this["GocqhttpFilePath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public uint RobotID {
+            get {
+                return ((uint)(this["RobotID"]));
+            }
+            set {
+                this["RobotID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RobotName {
+            get {
+                return ((string)(this["RobotName"]));
+            }
+            set {
+                this["RobotName"] = value;
+            }
+        }
     }
 }
