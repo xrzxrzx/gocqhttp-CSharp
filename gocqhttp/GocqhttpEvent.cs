@@ -9,27 +9,70 @@ using Newtonsoft.Json;
 using System.Text.Json.Nodes;
 using gocqhttp_CSharp.gocqhttp.Base;
 using gocqhttp_CSharp.common;
-using gocqhttp_CSharp.gocqhttp.EventException;
+using Newtonsoft.Json.Linq;
 
 namespace gocqhttp_CSharp.gocqhttp
 {
     class GocqhttpEvent
     {
         GocqhttpOperater operater;
-        Dictionary<string, (ManualResetEvent, JsonObject?)> Echos;//回声（ID为回声，及线程ID，值为手动锁和JSON对象的元组）
-        EventList eventList;
-        Random random;
+        Dictionary<string, (ManualResetEvent Lock, JObject data)> Echos;//回声（ID为回声，及线程ID，值为手动锁和JSON对象的元组）
+        FunctionList functionList;
         public GocqhttpEvent(GocqhttpOperater operater)
         {
             this.operater = operater;
-            Echos = new Dictionary<string, (ManualResetEvent, JsonObject?)>();
-            eventList= new EventList();
-            random = new Random();
+            Echos = new Dictionary<string, (ManualResetEvent Lock, JObject data)>();
+            functionList = new FunctionList();
+            this.operater.SetWebsocket(MessageArrived);
+        }
+        /// <summary>
+        /// 当有数据到达
+        /// </summary>
+        /// <param name="message">数据</param>
+        private void MessageArrived(string message)
+        {
+            JObject jsonMsg = JObject.Parse(message);
+            string? post_type = jsonMsg["post_type"]?.ToString() ?? string.Empty;
+            if(post_type != null)//如果接受到的数据为事件
+            {
+                switch(post_type)
+                {
+                    case "message":
+                        break;
+                    case "message_sent":
+                        break;
+                    case "request":
+                        break;
+                    case "notice":
+                        break;
+                    case "meta_event":
+                        break;
+                    default:
+                        Log.Warn("未知事件类型\nData：" + jsonMsg.ToString());
+                        break;
+                }
+            }
+            else
+            {
+                string? echo = jsonMsg["echo"]?.ToString() ?? string.Empty;
+                if(echo != null)
+                {
+                    JObject? data = jsonMsg["data"]?.ToObject<JObject>();
+                    if(data != null)
+                    {
+                        ApiDataArrived(echo, data);
+                    }
+                    else
+                    {
+                        Log.Warn($"API调用出错\nstatus: {jsonMsg["status"]}\nretcode: {jsonMsg["retcode"]}\nmsg: {jsonMsg["msg"]}");
+                    }
+                }
+            }
         }
         /// <summary>
         /// 向回声集合添加回声
         /// </summary>
-        /// <param name="manualResetEvent"></param>
+        /// <param name="manualResetEvent">手动响应信号</param>
         /// <returns>回声</returns>
         public string AddEcho(ManualResetEvent manualResetEvent)
         {
@@ -40,6 +83,9 @@ namespace gocqhttp_CSharp.gocqhttp
             }
             return id.ToString();//返回回声
         }
+        /// <summary>
+        /// 销毁回声
+        /// </summary>
         private void DeleteEcho()
         {
             lock(Echos)
@@ -47,6 +93,10 @@ namespace gocqhttp_CSharp.gocqhttp
                 Echos.Remove(Thread.CurrentThread.GetHashCode().ToString());
             }
         }
+        /// <summary>
+        /// 获取API返回数据
+        /// </summary>
+        /// <returns>返回JSON对象</returns>
         public JsonObject? GetApiData()
         {
             (ManualResetEvent manualResetEvent, JsonObject? json) apiData;
@@ -57,9 +107,93 @@ namespace gocqhttp_CSharp.gocqhttp
             DeleteEcho();
             return apiData.json;
         }
-        public void RegisterMessageEvent(MessageEventClass messageEvent)
+        public void ApiDataArrived(string echo, JObject data)
         {
-
+            lock(Echos)
+            {
+                if(Echos.ContainsKey(echo))
+                {
+                    Echos[echo] = (Echos[echo].Lock, data);
+                    Echos[echo].Lock.Set();
+                }
+            }
+        }
+        public void RegisterMessageFunc(string name, string matching, MessageEventClass func)
+        {
+            try
+            {
+                functionList.AddMessageFunc(name, matching, func);
+            }
+            catch(FunctionIsRegisteredException ex)
+            {
+                throw ex;
+            }
+        }
+        public void RegisterMessageSentFunc(string name, string matching, MessageSentEventClass func)
+        {
+            try
+            {
+                functionList.AddMessageSentFunc(name, matching, func);
+            }
+            catch(FunctionIsRegisteredException ex)
+            {
+                throw ex;
+            }
+        }
+        public void RegisterRequestFunc(string name, RequestEventClass.MatchingType matching, RequestEventClass func)
+        {
+            try
+            {
+                functionList.AddRequestFunc(name, matching, func);
+            }
+            catch(FunctionIsRegisteredException ex)
+            {
+                throw ex;
+            }
+        }
+        public void RegisterNoticeFunc(string name, NoticeEventClass.MatchingType matching, NoticeEventClass func)
+        {
+            try
+            {
+                functionList.AddNoticeFunc(name, matching, func);
+            }
+            catch(FunctionIsRegisteredException ex)
+            {
+                throw ex;
+            }
+        }
+        public void RegisterMetaFunc(string name, MetaEventClass.MatchingType matching, MetaEventClass func)
+        {
+            try
+            {
+                functionList.AddMetaFunc(name, matching, func);
+            }
+            catch(FunctionIsRegisteredException ex)
+            {
+                throw ex;
+            }
+        }
+        public void BanFunc(string name, uint group_id)
+        {
+            try
+            {
+                functionList.TryBan(name, group_id);
+            }
+            catch(FunctionIsBannedException ex)
+            {
+                throw ex;
+            }
+        }
+        public void UnbanFunc(string name, uint group_id)
+        {
+            try
+            {
+                functionList.TryUnban(name, group_id);
+            }
+            catch(FunctionIsUnbannedException ex)
+            {
+                throw ex;
+            }
         }
     }
     namespace Base
@@ -69,106 +203,103 @@ namespace gocqhttp_CSharp.gocqhttp
         /// </summary>
         abstract class MessageEventClass
         {
-            public string? Name { get; set; }
-            #region 消息事件通用数据
-            uint user_id; 
-            #endregion
-            //JSON字符串
-            public JsonObject? Data { private get; set; }
-            public string? Matching { get; set; }
-            public abstract void MessageArrived();
+            //功能名
+            public string Name { get; set; } = "";
+            /// <summary>
+            /// 消息事件通用数据
+            /// </summary>
+            public class CommonData
+            {
+                uint user_id { get; set; }
+                uint group_id { get; set; }
+                uint time { get; set; }
+                uint self_id { get; set; }
+                string sub_type { get; set; } = string.Empty;
+                //TODO JsonObject message { get; set; } //待实现
+                int message_id { get; set; }
+                string raw_message { get; set; } = string.Empty;
+                int font { get; set; }
+                //TODO JsonObject sender {get; set; } //待实现
+            }
+            //响应条件
+            public string Matching { get; set; } = "";
+            public abstract void MessageArrived(CommonData commonData, JsonObject jsonData);
         }
         /// <summary>
         /// 消息发送事件
         /// </summary>
         abstract class MessageSentEventClass
         {
-            public string? Name { get; set; }
-            public JsonObject? Data { private get; set; }
-            public string? Matching { get; set; }
-            public abstract void MessageSent();
+            //功能名
+            public string Name { get; set; } = "";
+            /// <summary>
+            /// 消息事件通用数据
+            /// </summary>
+            public class CommonData
+            {
+                uint user_id { get; set; }
+                uint group_id { get; set; }
+                uint time { get; set; }
+                uint self_id { get; set; }
+                string sub_type { get; set; } = string.Empty;
+                //TODO JsonObject message { get; set; } //待实现
+                int message_id { get; set; }
+                string raw_message { get; set; } = string.Empty;
+                int font { get; set; }
+                //TODO JsonObject sender {get; set; } //待实现
+            }
+            //响应条件
+            public string Matching { get; set; } = "";
+            public abstract void MessageSent(CommonData commonData, JsonObject jsonData);
         }
         /// <summary>
         /// 请求事件
         /// </summary>
         abstract class RequestEventClass
         {
-            public string? Name { get; set; }
-            public JsonObject? Data { private get; set; }
+            //功能名
+            public string Name { get; set; } = "";
             public enum MatchingType
             {
                 firend,
                 group
             }
-            public string? Matching { get; set; }
-            public MatchingType Type { get; set; }
-            public abstract void RequestArrived();
+            //响应条件
+            public MatchingType Matching{ get; set; }
+            public abstract void RequestArrived(JsonObject jsonData);
         }
         /// <summary>
         /// 上报事件
         /// </summary>
         abstract class NoticeEventClass
         {
-            public string? Name { get; set; }
-            public JsonObject? Data { private get; set; }
+            //功能名
+            public string Name { get; set; } = "";
             public enum MatchingType
             {
                 group_upload,
                 group_admin
-                    //TODO 未写完
+                //TODO 未写完
             }
-            public string? Matching { get; set; }
-            public MatchingType Type { get; set; }
-            public abstract void NoticeArrived();
+            //响应条件
+            public MatchingType Matching { get; set; }
+            public abstract void NoticeArrived(JsonObject jsonData);
         }
         /// <summary>
         /// 元事件
         /// </summary>
         abstract class MetaEventClass
         {
-            public string? Name { get; set; }
-            public JsonObject? Data { private get; set; }
-            public abstract void MetaArrived();
-        }
-    }
-    internal class EventList
-    {
-        #region 注册事件列表
-        private List<MessageEventClass> messageEventList;//消息事件
-        private List<MessageSentEventClass> messageSentEventList;//消息上报事件
-        private List<RequestEventClass> requestEventList;//请求事件
-        private List<NoticeEventClass> noticeEventList;//上报事件
-        private List<MetaEventClass> metaEventList;//元事件
-        #endregion
-        public EventList()
-        {
-            eventRegistrationList = new Dictionary<string, List<uint>> { };
-            #region 注册事件列表初始化
-            messageEventList = new List<MessageEventClass> { };
-            messageSentEventList = new List<MessageSentEventClass> { };
-            requestEventList = new List<RequestEventClass> { };
-            noticeEventList = new List<NoticeEventClass> { };
-            metaEventList = new List<MetaEventClass> { };
-            #endregion
-        }
-        public void AddMessageEvent(string name, string regular, MessageEventClass messageEvent)
-        {
-            if (isMessageEventRegistration(name, messageEvent))//如果订阅名或正则已被注册
+            //功能名
+            public string Name { get; set; } = "";
+            public enum MatchingType
             {
-                Log.Info("事件" + name + "事件名或正则表达式已被注册");
-                throw new GocqhttpEventEcption(
-                    eventName: name, 
-                    type: GocqEventExceptionType.Registered);
+                lifecycle,
+                heartbeat
             }
-            eventRegistrationList.Add(name, new List<uint>());
-            messageEventList.Add(messageEvent);
-
-            bool isMessageEventRegistration(string name, MessageEventClass messageEvent)
-            {
-                return eventRegistrationList.ContainsKey(name) ||
-                                messageEventList.Find(s =>
-                                s.Matching == messageEvent.Matching) != null;
-            }
+            //响应条件
+            public MatchingType Matching { get; set; }
+            public abstract void MetaArrived(JsonObject jsonData);
         }
     }
     internal class BanList
@@ -178,6 +309,12 @@ namespace gocqhttp_CSharp.gocqhttp
         {
             banList = new Dictionary<uint, List<string>>();
         }
+        /// <summary>
+        /// Ban掉某个功能
+        /// </summary>
+        /// <param name="name">功能名</param>
+        /// <param name="gourp_id">要ban的群ID</param>
+        /// <exception cref="FunctionIsBannedException">已经被ban了</exception>
         public void Ban(string name, uint gourp_id)
         {
             if(banList.ContainsKey(gourp_id))
@@ -185,17 +322,52 @@ namespace gocqhttp_CSharp.gocqhttp
                 var names = banList[gourp_id];
                 if(names.Contains(name))
                 {
-                    throw new GocqhttpEventEcption(
-                        group_id: gourp_id,
-                        eventName: name,
-                        type: GocqEventExceptionType.Banned);
+                    throw new FunctionIsBannedException(name);
                 }
+                else
+                {
+                    names.Add(name);
+                }
+            }
+            else
+            {
+                var banName = new List<string>
+                {
+                    name
+                };
+                banList.Add(gourp_id, banName);
+            }
+        }
+        /// <summary>
+        /// 解Ban掉某个功能
+        /// </summary>
+        /// <param name="name">功能名</param>
+        /// <param name="group_id">要解ban的群ID</param>
+        /// <exception cref="FunctionIsUnbannedException">未被ban过</exception>
+        public void Unban(string name, uint group_id)
+        {
+            List<string>? value;
+            if(banList.TryGetValue(group_id, out value))
+            {
+                if(value.Contains(name))
+                {
+                    value.Remove(name);
+                }
+                else
+                {
+                    throw new FunctionIsUnbannedException(name);
+                }
+            }
+            else
+            {
+                throw new FunctionIsUnbannedException(name);
             }
         }
     }
     internal class FunctionList
     {
         private List<string> AllFunctions;
+        private BanList banList;
         #region 注册事件列表
         private List<MessageEventClass> messageEventFunctions;//消息事件
         private List<MessageSentEventClass> messageSentEventFunctions;//消息上报事件
@@ -206,15 +378,158 @@ namespace gocqhttp_CSharp.gocqhttp
         public FunctionList()
         {
             AllFunctions = new List<string>();
+            banList = new BanList();
             messageEventFunctions = new List<MessageEventClass> { };
             messageSentEventFunctions = new List<MessageSentEventClass> { };
             requestEventFunctions = new List<RequestEventClass> { };
             noticeEventFunctions = new List<NoticeEventClass> { };
             metaEventFunctions = new List<MetaEventClass> { };
         }
-        public void AddFunction(string function, )
+        private void AddFunction(string function, object matching)
         {
-            AllFunctions.Add(function);
+            if(IsRegistered(function, matching) == true)
+            {
+                throw new FunctionIsRegisteredException("功能：“" + function + "” 的名称或响应条件已注册");
+            }
+            else
+            {
+                AllFunctions.Add(function);
+            }
+
+            /// <summary>
+            /// 该功能是否已被注册
+            /// </summary>
+            /// <param name="name">订阅名</param>
+            /// <param name="matching">响应条件</param>
+            /// <returns></returns>
+            bool IsRegistered(string name, object matching)
+            {
+                if(AllFunctions.Exists(e => e == name))
+                {
+                    return true;
+                }
+                else if (messageEventFunctions.Find(e => e.Matching == matching as string) != null)
+                {
+                    return true;
+                }
+                else if (messageSentEventFunctions.Find(e => e.Matching == matching as string) != null)
+                {
+                    return true;
+                }
+                else if (requestEventFunctions.Find(e =>
+                e.Matching == (matching.GetType() == typeof(RequestEventClass.MatchingType) ? (RequestEventClass.MatchingType)matching : null)) != null)
+                {
+                    return true;
+                }
+                else if (noticeEventFunctions.Find(e =>
+                e.Matching == (matching.GetType() == typeof(NoticeEventClass.MatchingType) ? (NoticeEventClass.MatchingType)matching : null)) != null)
+                {
+                    return true;
+                }
+                else if (metaEventFunctions.Find(e =>
+                e.Matching == (matching.GetType() == typeof(MetaEventClass.MatchingType) ? (MetaEventClass.MatchingType)matching : null)) != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+        } 
+        public void AddMessageFunc(string name, string matching, MessageEventClass func)
+        {
+            try
+            {
+                AddFunction(name, matching);
+            }
+            catch(FunctionIsRegisteredException ex)
+            {
+                Log.Error(ex.Message);
+                throw ex;
+            }
+            func.Name = name;
+            func.Matching = matching;
+            messageEventFunctions.Add(func);
+        }
+        public void AddMessageSentFunc(string name, string matching, MessageSentEventClass func)
+        {
+            try
+            {
+                AddFunction(name, matching);
+            }
+            catch (FunctionIsRegisteredException ex)
+            {
+                Log.Error(ex.Message);
+                throw ex;
+            }
+            func.Name = name;
+            func.Matching = matching;
+            messageSentEventFunctions.Add(func);
+        }
+        public void AddRequestFunc(string name, RequestEventClass.MatchingType matching, RequestEventClass func)
+        {
+            try
+            {
+                AddFunction(name, matching);
+            }
+            catch (FunctionIsRegisteredException ex)
+            {
+                Log.Error(ex.Message);
+                throw ex;
+            }
+            func.Name = name;
+            func.Matching = matching;
+            requestEventFunctions.Add(func);
+        }
+        public void AddNoticeFunc(string name, NoticeEventClass.MatchingType matching, NoticeEventClass func)
+        {
+            try
+            {
+                AddFunction(name, matching);
+            }
+            catch (FunctionIsRegisteredException ex)
+            {
+                Log.Error(ex.Message);
+                throw ex;
+            }
+            func.Name = name;
+            func.Matching = matching;
+            noticeEventFunctions.Add(func);
+        }
+        public void AddMetaFunc(string name, MetaEventClass.MatchingType matching, MetaEventClass func)
+        {
+            try
+            {
+                AddFunction(name, matching);
+            }
+            catch (FunctionIsRegisteredException ex)
+            {
+                Log.Error(ex.Message);
+                throw ex;
+            }
+            func.Name = name;
+            func.Matching = matching;
+            metaEventFunctions.Add(func);
+        }
+        public void TryBan(string name, uint gourp_id)
+        {
+            try
+            {
+                banList.Ban(name, gourp_id);
+            }
+            catch(FunctionIsBannedException ex)
+            {
+                throw ex;
+            }
+        }
+        public void TryUnban(string name, uint gourp_id)
+        {
+            try
+            {
+                banList.Unban(name, gourp_id);
+            }
+            catch(FunctionIsUnbannedException ex)
+            {
+                throw ex;
+            }
         }
     }
 }

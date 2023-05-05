@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace gocqhttp_CSharp.gocqhttp
 {
-    class GocqhttpException : Exception
+    public class GocqhttpException : Exception
     {
         public GocqhttpException(string msg) : base(msg) { }
     }
-    class GocqhttpEventEcption : Exception
+    class GocqhttpEventExcption : Exception
     {
         public new string Message { get; set; }
         public string eventName { get; private set; }
-        public GocqhttpEventEcption(uint group_id = 0, uint user_id = 0, string eventName, GocqEventExceptionType type)
+        public GocqhttpEventExcption(string eventName, GocqEventExceptionType type, uint group_id = 0, uint user_id = 0)
         {
             Message = string.Empty;
             this.eventName = eventName;
-            switch(type)
+            switch (type)
             {
                 case GocqEventExceptionType.Registered:
                     Message = "事件“" + eventName + "”已注册";
@@ -29,9 +29,21 @@ namespace gocqhttp_CSharp.gocqhttp
             }
         }
     }
+    public class FunctionIsRegisteredException : GocqhttpException
+    {
+        public FunctionIsRegisteredException(string msg) : base(msg) { }
+    }
+    public class FunctionIsBannedException : GocqhttpException
+    {
+        public FunctionIsBannedException(string msg) : base(msg) { }
+    }
+    public class FunctionIsUnbannedException : GocqhttpException
+    {
+        public FunctionIsUnbannedException(string msg) : base(msg) { }
+    }
     public enum GocqEventExceptionType
     {
-        Registered = 0,
-        Banned = 1
+        Registered,
+        Banned
     }
 }
