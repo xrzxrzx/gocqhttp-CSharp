@@ -16,12 +16,12 @@ namespace gocqhttp_CSharp.gocqhttp
     class GocqhttpEvent
     {
         GocqhttpOperater operater;
-        Dictionary<string, (ManualResetEvent Lock, JObject data)> Echos;//回声（ID为回声，及线程ID，值为手动锁和JSON对象的元组）
+        Dictionary<string, (ManualResetEvent Lock, JObject? data)> Echos;//回声（ID为回声，及线程ID，值为手动锁和JSON对象的元组）
         FunctionList functionList;
         public GocqhttpEvent(GocqhttpOperater operater)
         {
             this.operater = operater;
-            Echos = new Dictionary<string, (ManualResetEvent Lock, JObject data)>();
+            Echos = new Dictionary<string, (ManualResetEvent Lock, JObject? data)>();
             functionList = new FunctionList();
             this.operater.SetWebsocket(MessageArrived);
         }
@@ -97,9 +97,9 @@ namespace gocqhttp_CSharp.gocqhttp
         /// 获取API返回数据
         /// </summary>
         /// <returns>返回JSON对象</returns>
-        public JsonObject? GetApiData()
+        public JObject? GetApiData()
         {
-            (ManualResetEvent manualResetEvent, JsonObject? json) apiData;
+            (ManualResetEvent manualResetEvent, JObject? json) apiData;
             lock(Echos)
             {
                 apiData = Echos[Thread.CurrentThread.GetHashCode().ToString()];

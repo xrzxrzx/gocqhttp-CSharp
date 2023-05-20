@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using gocqhttp_CSharp.gocqhttp.Base;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace gocqhttp_CSharp.gocqhttp
 {
@@ -15,11 +15,13 @@ namespace gocqhttp_CSharp.gocqhttp
         static GocqhttpOperater operater;
         static GocqhttpAPI gocqhttpAPI;
         static GocqhttpEvent gocqhttpEvent;
+        static APIs Apis;
         static Gocqhttp()
         {
             operater= new GocqhttpOperater();
             gocqhttpAPI = new GocqhttpAPI(operater);
             gocqhttpEvent = new GocqhttpEvent(operater);
+            Apis = gocqhttpAPI.GetAPIs();
         }
         public static void Init(Action initFunction) => initFunction();
         /// <summary>
@@ -33,7 +35,7 @@ namespace gocqhttp_CSharp.gocqhttp
         /// （功能名与响应条件是唯一的）
         /// </summary>
         /// <returns>API返回的数据（若为null则调用API失败）</returns>
-        public static JsonObject? GetApiReturnData() => gocqhttpEvent.GetApiData();
+        public static JObject? GetApiReturnData() => gocqhttpEvent.GetApiData();
         /// <summary>
         /// 注册消息事件功能
         /// （功能名与响应条件是唯一的）

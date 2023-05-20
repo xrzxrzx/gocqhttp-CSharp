@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Web;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Reflection.Metadata.Ecma335;
 using gocqhttp_CSharp.gocqhttp.JSON;
 using System.Threading;
@@ -32,6 +33,7 @@ namespace gocqhttp_CSharp.gocqhttp
             APIs = new Dictionary<string, List<string>>();
             this.operater = operater;
         }
+        public APIs GetAPIs() => new APIs(operater);
         /// <summary>
         /// 加载API文件
         /// </summary>
@@ -69,11 +71,11 @@ namespace gocqhttp_CSharp.gocqhttp
         /// <param name="name">API名（终结点）</param>
         /// <param name="values">API所有参数</param>
         /// <exception cref="Exception">未知API</exception>
-        public JsonObject? SendAPI(string name, params object[] values)
+        public JObject? SendAPI(string name, params object[] values)
         {
             ManualResetEvent manualResetEvent= new ManualResetEvent(false);
             string sendString;
-            JsonObject? recvData;
+            JObject? recvData;
             List<string> APIParams;
             API_JSON json = new API_JSON(name);
 
@@ -114,6 +116,15 @@ namespace gocqhttp_CSharp.gocqhttp
         }
     }
 
+    partial class APIs
+    {
+        public GocqhttpOperater operater;
+        public APIs(GocqhttpOperater operater)
+        {
+            this.operater = operater;
+        }
+
+    }
     namespace JSON
     {
         /// <summary>

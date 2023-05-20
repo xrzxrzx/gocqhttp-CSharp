@@ -85,13 +85,25 @@ namespace gocqhttp_CSharp {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("小机器人")]
         public string RobotName {
             get {
                 return ((string)(this["RobotName"]));
             }
             set {
                 this["RobotName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RobotPwd {
+            get {
+                return ((string)(this["RobotPwd"]));
+            }
+            set {
+                this["RobotPwd"] = value;
             }
         }
     }

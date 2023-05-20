@@ -18,6 +18,9 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="RobotName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">小机器人</Value>
+    </Setting>
+    <Setting Name="RobotPwd" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>
