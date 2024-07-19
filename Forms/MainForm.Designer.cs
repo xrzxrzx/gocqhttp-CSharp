@@ -40,7 +40,8 @@
             this.QQPage = new System.Windows.Forms.TabPage();
             this.RobotPage = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.StartButton = new System.Windows.Forms.Button();
+            this.CloseButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.SuspendLayout();
@@ -68,7 +69,7 @@
             // gocqhttp设置ToolStripMenuItem
             // 
             this.gocqhttp设置ToolStripMenuItem.Name = "gocqhttp设置ToolStripMenuItem";
-            this.gocqhttp设置ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.gocqhttp设置ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
             this.gocqhttp设置ToolStripMenuItem.Text = "机器人设置";
             this.gocqhttp设置ToolStripMenuItem.Click += new System.EventHandler(this.gocqhttp设置ToolStripMenuItem_Click);
             // 
@@ -150,21 +151,33 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "日志输出";
             // 
-            // button1
+            // StartButton
             // 
-            this.button1.Location = new System.Drawing.Point(42, 521);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 29);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.StartButton.Location = new System.Drawing.Point(84, 494);
+            this.StartButton.Name = "StartButton";
+            this.StartButton.Size = new System.Drawing.Size(137, 60);
+            this.StartButton.TabIndex = 4;
+            this.StartButton.Text = "开启";
+            this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.Location = new System.Drawing.Point(400, 494);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(137, 60);
+            this.CloseButton.TabIndex = 5;
+            this.CloseButton.Text = "关闭";
+            this.CloseButton.UseVisualStyleBackColor = true;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(917, 566);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.CloseButton);
+            this.Controls.Add(this.StartButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TabControl);
             this.Controls.Add(this.richTextBox1);
@@ -195,6 +208,7 @@
         private TabPage QQPage;
         private Label label1;
         private TabPage RobotPage;
-        private Button button1;
+        private Button StartButton;
+        private Button CloseButton;
     }
 }

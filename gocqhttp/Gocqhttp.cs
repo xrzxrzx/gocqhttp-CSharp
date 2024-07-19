@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -159,6 +160,15 @@ namespace gocqhttp_CSharp.gocqhttp
             {
                 throw ex;
             }
+        }
+        public static void Start()
+        {
+            operater.Connect();
+            operater.Send("testsd");
+        }
+        public static void Stop()
+        {
+            operater.Disconnect();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using gocqhttp_CSharp.common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -44,9 +45,21 @@ namespace gocqhttp_CSharp.gocqhttp
         /// </summary>
         public void Connect()
         {
+            Log.Info("读取配置文件");
             setting.Reload();
+            Log.Info($"IP: {setting.IP}   Port: {setting.Port}");
             webSocket = new WebSocket("ws://" + setting.IP + ":" + setting.Port.ToString());
-            webSocket.Connect();
+            Log.Info($"Connecting {setting.IP}");
+            try
+            {
+                webSocket.Connect();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.ToString());
+            }
+            Log.Info(webSocket.IsAlive.ToString());
+            Log.Info("连接Gocqhttp完成");
         }
         /// <summary>
         /// 断开与gocqhttp的连接

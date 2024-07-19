@@ -38,24 +38,29 @@ namespace gocqhttp_CSharp.gocqhttp
                 switch(post_type)
                 {
                     case "message":
+                        Log.Info("消息事件");
                         break;
                     case "message_sent":
+                        Log.Info("消息发送事件");
                         break;
                     case "request":
+                        Log.Info("请求事件");
                         break;
                     case "notice":
+                        Log.Info("通知事件");
                         break;
                     case "meta_event":
+                        Log.Info("元事件");
                         break;
                     default:
                         Log.Warn("未知事件类型\nData：" + jsonMsg.ToString());
                         break;
                 }
             }
-            else
+            else//接收到了API返回的数据
             {
-                string? echo = jsonMsg["echo"]?.ToString() ?? string.Empty;
-                if(echo != null)
+                string echo = jsonMsg["echo"]?.ToString() ?? string.Empty;
+                if(echo != string.Empty)
                 {
                     JObject? data = jsonMsg["data"]?.ToObject<JObject>();
                     if(data != null)
@@ -66,6 +71,10 @@ namespace gocqhttp_CSharp.gocqhttp
                     {
                         Log.Warn($"API调用出错\nstatus: {jsonMsg["status"]}\nretcode: {jsonMsg["retcode"]}\nmsg: {jsonMsg["msg"]}");
                     }
+                }
+                else
+                {
+                    //TODO 待添加
                 }
             }
         }

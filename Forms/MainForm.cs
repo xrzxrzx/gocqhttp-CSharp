@@ -53,5 +53,14 @@ namespace gocqhttp_CSharp.Forms
                 }
             }
         }
+
+        private void StartButton_Click(object sender, EventArgs e)
+        {
+            Gocqhttp.Start();
+        }
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            Gocqhttp.Stop();
+        }
     }
 }

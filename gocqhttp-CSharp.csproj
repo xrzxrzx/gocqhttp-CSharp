@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="bot\**" />
+    <EmbeddedResource Remove="bot\**" />
+    <None Remove="bot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EleCho.GoCqHttpSdk" Version="1.2.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="WebSocketSharp-netstandard" Version="1.0.1" />
     <PackageReference Include="YamlDotNet" Version="13.1.0" />

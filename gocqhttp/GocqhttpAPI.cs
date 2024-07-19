@@ -24,8 +24,8 @@ namespace gocqhttp_CSharp.gocqhttp
         #region API的JSON节点
         private class APINode
         {
-            public string? Name { set; get; }
-            public List<string>? Params { set; get; }
+            public string? Name { set; get; }//API名称
+            public List<string>? Params { set; get; }//API参数
         }
         #endregion
         public GocqhttpAPI(GocqhttpOperater operater)
