@@ -38,22 +38,22 @@ namespace gocqhttp_CSharp.gocqhttp
                 switch(post_type)
                 {
                     case "message":
-                        Log.Info("消息事件");
+                        TextLog.Info("消息事件");
                         break;
                     case "message_sent":
-                        Log.Info("消息发送事件");
+                        TextLog.Info("消息发送事件");
                         break;
                     case "request":
-                        Log.Info("请求事件");
+                        TextLog.Info("请求事件");
                         break;
                     case "notice":
-                        Log.Info("通知事件");
+                        TextLog.Info("通知事件");
                         break;
                     case "meta_event":
-                        Log.Info("元事件");
+                        TextLog.Info("元事件");
                         break;
                     default:
-                        Log.Warn("未知事件类型\nData：" + jsonMsg.ToString());
+                        TextLog.Warn("未知事件类型\nData：" + jsonMsg.ToString());
                         break;
                 }
             }
@@ -69,7 +69,7 @@ namespace gocqhttp_CSharp.gocqhttp
                     }
                     else
                     {
-                        Log.Warn($"API调用出错\nstatus: {jsonMsg["status"]}\nretcode: {jsonMsg["retcode"]}\nmsg: {jsonMsg["msg"]}");
+                        TextLog.Warn($"API调用出错\nstatus: {jsonMsg["status"]}\nretcode: {jsonMsg["retcode"]}\nmsg: {jsonMsg["msg"]}");
                     }
                 }
                 else
@@ -451,7 +451,7 @@ namespace gocqhttp_CSharp.gocqhttp
             }
             catch(FunctionIsRegisteredException ex)
             {
-                Log.Error(ex.Message);
+                TextLog.Error(ex.Message);
                 throw ex;
             }
             func.Name = name;
@@ -466,7 +466,7 @@ namespace gocqhttp_CSharp.gocqhttp
             }
             catch (FunctionIsRegisteredException ex)
             {
-                Log.Error(ex.Message);
+                TextLog.Error(ex.Message);
                 throw ex;
             }
             func.Name = name;
@@ -481,7 +481,7 @@ namespace gocqhttp_CSharp.gocqhttp
             }
             catch (FunctionIsRegisteredException ex)
             {
-                Log.Error(ex.Message);
+                TextLog.Error(ex.Message);
                 throw ex;
             }
             func.Name = name;
@@ -496,7 +496,7 @@ namespace gocqhttp_CSharp.gocqhttp
             }
             catch (FunctionIsRegisteredException ex)
             {
-                Log.Error(ex.Message);
+                TextLog.Error(ex.Message);
                 throw ex;
             }
             func.Name = name;
@@ -511,7 +511,7 @@ namespace gocqhttp_CSharp.gocqhttp
             }
             catch (FunctionIsRegisteredException ex)
             {
-                Log.Error(ex.Message);
+                TextLog.Error(ex.Message);
                 throw ex;
             }
             func.Name = name;

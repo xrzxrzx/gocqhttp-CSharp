@@ -85,7 +85,7 @@ namespace gocqhttp_CSharp.gocqhttp
                 APIParams = APIs[name];
                 if(APIParams.Count > values.Length)
                 {
-                    Log.Warn("API “" + name + "” 参数过少");
+                    TextLog.Warn("API “" + name + "” 参数过少");
                 }
                 int i = 0;
                 foreach (string param in APIParams)
@@ -98,19 +98,19 @@ namespace gocqhttp_CSharp.gocqhttp
             }
             else
             {
-                Log.Warn("未知API");
+                TextLog.Warn("未知API");
             }
             
             //转换成JSON字符串
             json.Echo = Gocqhttp.GetEcho(manualResetEvent);
             sendString = JsonConvert.SerializeObject(json);
 
-            operater.Send(sendString);//发送
+            operater.SendMessage(sendString);//发送
             //休眠（至多3秒），并等待被唤醒
             manualResetEvent.WaitOne(TimeSpan.FromSeconds(3), true);
             if((recvData = Gocqhttp.GetApiReturnData()) == null)
             {
-                Log.Warn("API：" + name + " 调用失败");
+                TextLog.Warn("API：" + name + " 调用失败");
             }
             return recvData;
         }

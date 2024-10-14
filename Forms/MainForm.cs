@@ -28,9 +28,9 @@ namespace gocqhttp_CSharp.Forms
         private void gocqhttp设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RobotSettingForm robotSettingForm = new RobotSettingForm();
-            Log.Info("打开前");
+            TextLog.Info("打开前");
             robotSettingForm.ShowDialog();
-            Log.Info("打开后");
+            TextLog.Info("打开后");
         }
         /// <summary>
         /// 修改用于输出的文本域（可跨线程）
@@ -38,16 +38,16 @@ namespace gocqhttp_CSharp.Forms
         /// <param name="text"></param>
         public void UpdateText(string text)
         {
-            if(richTextBox1.InvokeRequired == true)
+            if (richTextBox1.InvokeRequired == true)
             {
-                lock(richTextBox1)
+                lock (richTextBox1)
                 {
                     Invoke(new Action(() => { richTextBox1.Text += text; }));
                 }
             }
             else
             {
-                lock(richTextBox1)
+                lock (richTextBox1)
                 {
                     richTextBox1.Text += text;
                 }
@@ -57,8 +57,15 @@ namespace gocqhttp_CSharp.Forms
         private void StartButton_Click(object sender, EventArgs e)
         {
             Gocqhttp.Start();
+            TextLog.Info("已开启");
         }
         private void CloseButton_Click(object sender, EventArgs e)
+        {
+            Gocqhttp.Stop();
+            TextLog.Info("已关闭");
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Gocqhttp.Stop();
         }

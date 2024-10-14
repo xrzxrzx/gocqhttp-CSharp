@@ -8,7 +8,7 @@ using gocqhttp_CSharp.Forms;
 
 namespace gocqhttp_CSharp.common
 {
-    static class Log
+    static class TextLog
     {
         static MainForm? outDomain;
         public static void SetOutDomain(MainForm form) => outDomain = form;

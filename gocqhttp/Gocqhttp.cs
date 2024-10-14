@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
+using gocqhttp_CSharp.common;
 using gocqhttp_CSharp.gocqhttp.Base;
 using Newtonsoft.Json.Linq;
 
@@ -163,12 +164,11 @@ namespace gocqhttp_CSharp.gocqhttp
         }
         public static void Start()
         {
-            operater.Connect();
-            operater.Send("testsd");
+            operater.Start();
         }
         public static void Stop()
         {
-            operater.Disconnect();
+            operater.Close();
         }
     }
 }

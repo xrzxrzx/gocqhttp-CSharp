@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="IP" Type="System.String" Scope="User">
-      <Value Profile="(Default)">127.0.0.1</Value>
+      <Value Profile="(Default)">0.0.0.0</Value>
     </Setting>
     <Setting Name="Port" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">8080</Value>
+      <Value Profile="(Default)">3001</Value>
     </Setting>
     <Setting Name="ConfigFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -15,13 +15,13 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="RobotID" Type="System.UInt32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">3406515483</Value>
     </Setting>
     <Setting Name="RobotName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">小机器人</Value>
+      <Value Profile="(Default)">小爱衣</Value>
     </Setting>
     <Setting Name="RobotPwd" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Xrz!535a00110110</Value>
     </Setting>
   </Settings>
 </SettingsFile>

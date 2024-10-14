@@ -28,170 +28,175 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.功能ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gocqhttp设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.关于软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.关于作者ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.TabControl = new System.Windows.Forms.TabControl();
-            this.FunctionPage = new System.Windows.Forms.TabPage();
-            this.QQPage = new System.Windows.Forms.TabPage();
-            this.RobotPage = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.StartButton = new System.Windows.Forms.Button();
-            this.CloseButton = new System.Windows.Forms.Button();
-            this.menuStrip1.SuspendLayout();
-            this.TabControl.SuspendLayout();
-            this.SuspendLayout();
+            menuStrip1 = new MenuStrip();
+            功能ToolStripMenuItem = new ToolStripMenuItem();
+            gocqhttp设置ToolStripMenuItem = new ToolStripMenuItem();
+            关于ToolStripMenuItem = new ToolStripMenuItem();
+            关于软件ToolStripMenuItem = new ToolStripMenuItem();
+            关于作者ToolStripMenuItem = new ToolStripMenuItem();
+            richTextBox1 = new RichTextBox();
+            TabControl = new TabControl();
+            FunctionPage = new TabPage();
+            QQPage = new TabPage();
+            RobotPage = new TabPage();
+            label1 = new Label();
+            StartButton = new Button();
+            CloseButton = new Button();
+            menuStrip1.SuspendLayout();
+            TabControl.SuspendLayout();
+            SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.功能ToolStripMenuItem,
-            this.关于ToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(917, 28);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            menuStrip1.ImageScalingSize = new Size(20, 20);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { 功能ToolStripMenuItem, 关于ToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Padding = new Padding(7, 2, 0, 2);
+            menuStrip1.Size = new Size(1121, 32);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip1";
             // 
             // 功能ToolStripMenuItem
             // 
-            this.功能ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gocqhttp设置ToolStripMenuItem});
-            this.功能ToolStripMenuItem.Name = "功能ToolStripMenuItem";
-            this.功能ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.功能ToolStripMenuItem.Text = "功能";
+            功能ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { gocqhttp设置ToolStripMenuItem });
+            功能ToolStripMenuItem.Name = "功能ToolStripMenuItem";
+            功能ToolStripMenuItem.Size = new Size(62, 28);
+            功能ToolStripMenuItem.Text = "功能";
             // 
             // gocqhttp设置ToolStripMenuItem
             // 
-            this.gocqhttp设置ToolStripMenuItem.Name = "gocqhttp设置ToolStripMenuItem";
-            this.gocqhttp设置ToolStripMenuItem.Size = new System.Drawing.Size(167, 26);
-            this.gocqhttp设置ToolStripMenuItem.Text = "机器人设置";
-            this.gocqhttp设置ToolStripMenuItem.Click += new System.EventHandler(this.gocqhttp设置ToolStripMenuItem_Click);
+            gocqhttp设置ToolStripMenuItem.Name = "gocqhttp设置ToolStripMenuItem";
+            gocqhttp设置ToolStripMenuItem.Size = new Size(200, 34);
+            gocqhttp设置ToolStripMenuItem.Text = "机器人设置";
+            gocqhttp设置ToolStripMenuItem.Click += gocqhttp设置ToolStripMenuItem_Click;
             // 
             // 关于ToolStripMenuItem
             // 
-            this.关于ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.关于软件ToolStripMenuItem,
-            this.关于作者ToolStripMenuItem});
-            this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.关于ToolStripMenuItem.Text = "关于";
+            关于ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 关于软件ToolStripMenuItem, 关于作者ToolStripMenuItem });
+            关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
+            关于ToolStripMenuItem.Size = new Size(62, 28);
+            关于ToolStripMenuItem.Text = "关于";
             // 
             // 关于软件ToolStripMenuItem
             // 
-            this.关于软件ToolStripMenuItem.Name = "关于软件ToolStripMenuItem";
-            this.关于软件ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
-            this.关于软件ToolStripMenuItem.Text = "关于软件";
+            关于软件ToolStripMenuItem.Name = "关于软件ToolStripMenuItem";
+            关于软件ToolStripMenuItem.Size = new Size(182, 34);
+            关于软件ToolStripMenuItem.Text = "关于软件";
             // 
             // 关于作者ToolStripMenuItem
             // 
-            this.关于作者ToolStripMenuItem.Name = "关于作者ToolStripMenuItem";
-            this.关于作者ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
-            this.关于作者ToolStripMenuItem.Text = "关于作者";
+            关于作者ToolStripMenuItem.Name = "关于作者ToolStripMenuItem";
+            关于作者ToolStripMenuItem.Size = new Size(182, 34);
+            关于作者ToolStripMenuItem.Text = "关于作者";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 60);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(651, 424);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
+            richTextBox1.Location = new Point(15, 72);
+            richTextBox1.Margin = new Padding(4, 4, 4, 4);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(795, 508);
+            richTextBox1.TabIndex = 1;
+            richTextBox1.Text = "";
             // 
             // TabControl
             // 
-            this.TabControl.Controls.Add(this.FunctionPage);
-            this.TabControl.Controls.Add(this.QQPage);
-            this.TabControl.Controls.Add(this.RobotPage);
-            this.TabControl.Location = new System.Drawing.Point(669, 43);
-            this.TabControl.Name = "TabControl";
-            this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(236, 511);
-            this.TabControl.TabIndex = 2;
+            TabControl.Controls.Add(FunctionPage);
+            TabControl.Controls.Add(QQPage);
+            TabControl.Controls.Add(RobotPage);
+            TabControl.Location = new Point(818, 52);
+            TabControl.Margin = new Padding(4, 4, 4, 4);
+            TabControl.Name = "TabControl";
+            TabControl.SelectedIndex = 0;
+            TabControl.Size = new Size(288, 613);
+            TabControl.TabIndex = 2;
             // 
             // FunctionPage
             // 
-            this.FunctionPage.Location = new System.Drawing.Point(4, 29);
-            this.FunctionPage.Name = "FunctionPage";
-            this.FunctionPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FunctionPage.Size = new System.Drawing.Size(228, 478);
-            this.FunctionPage.TabIndex = 0;
-            this.FunctionPage.Text = "基本功能";
-            this.FunctionPage.UseVisualStyleBackColor = true;
+            FunctionPage.Location = new Point(4, 33);
+            FunctionPage.Margin = new Padding(4, 4, 4, 4);
+            FunctionPage.Name = "FunctionPage";
+            FunctionPage.Padding = new Padding(4, 4, 4, 4);
+            FunctionPage.Size = new Size(280, 576);
+            FunctionPage.TabIndex = 0;
+            FunctionPage.Text = "基本功能";
+            FunctionPage.UseVisualStyleBackColor = true;
             // 
             // QQPage
             // 
-            this.QQPage.Location = new System.Drawing.Point(4, 29);
-            this.QQPage.Name = "QQPage";
-            this.QQPage.Padding = new System.Windows.Forms.Padding(3);
-            this.QQPage.Size = new System.Drawing.Size(228, 478);
-            this.QQPage.TabIndex = 1;
-            this.QQPage.Text = "QQ功能";
-            this.QQPage.UseVisualStyleBackColor = true;
+            QQPage.Location = new Point(4, 33);
+            QQPage.Margin = new Padding(4, 4, 4, 4);
+            QQPage.Name = "QQPage";
+            QQPage.Padding = new Padding(4, 4, 4, 4);
+            QQPage.Size = new Size(280, 576);
+            QQPage.TabIndex = 1;
+            QQPage.Text = "QQ功能";
+            QQPage.UseVisualStyleBackColor = true;
             // 
             // RobotPage
             // 
-            this.RobotPage.Location = new System.Drawing.Point(4, 29);
-            this.RobotPage.Name = "RobotPage";
-            this.RobotPage.Size = new System.Drawing.Size(228, 478);
-            this.RobotPage.TabIndex = 2;
-            this.RobotPage.Text = "机器人功能";
-            this.RobotPage.UseVisualStyleBackColor = true;
+            RobotPage.Location = new Point(4, 33);
+            RobotPage.Margin = new Padding(4, 4, 4, 4);
+            RobotPage.Name = "RobotPage";
+            RobotPage.Size = new Size(280, 576);
+            RobotPage.TabIndex = 2;
+            RobotPage.Text = "机器人功能";
+            RobotPage.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 20);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "日志输出";
+            label1.AutoSize = true;
+            label1.Location = new Point(15, 34);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(82, 24);
+            label1.TabIndex = 3;
+            label1.Text = "日志输出";
             // 
             // StartButton
             // 
-            this.StartButton.Location = new System.Drawing.Point(84, 494);
-            this.StartButton.Name = "StartButton";
-            this.StartButton.Size = new System.Drawing.Size(137, 60);
-            this.StartButton.TabIndex = 4;
-            this.StartButton.Text = "开启";
-            this.StartButton.UseVisualStyleBackColor = true;
-            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
+            StartButton.Location = new Point(103, 593);
+            StartButton.Margin = new Padding(4, 4, 4, 4);
+            StartButton.Name = "StartButton";
+            StartButton.Size = new Size(167, 72);
+            StartButton.TabIndex = 4;
+            StartButton.Text = "开启";
+            StartButton.UseVisualStyleBackColor = true;
+            StartButton.Click += StartButton_Click;
             // 
             // CloseButton
             // 
-            this.CloseButton.Location = new System.Drawing.Point(400, 494);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(137, 60);
-            this.CloseButton.TabIndex = 5;
-            this.CloseButton.Text = "关闭";
-            this.CloseButton.UseVisualStyleBackColor = true;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            CloseButton.Location = new Point(489, 593);
+            CloseButton.Margin = new Padding(4, 4, 4, 4);
+            CloseButton.Name = "CloseButton";
+            CloseButton.Size = new Size(167, 72);
+            CloseButton.TabIndex = 5;
+            CloseButton.Text = "关闭";
+            CloseButton.UseVisualStyleBackColor = true;
+            CloseButton.Click += CloseButton_Click;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(917, 566);
-            this.Controls.Add(this.CloseButton);
-            this.Controls.Add(this.StartButton);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.TabControl);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
-            this.Name = "MainForm";
-            this.Text = "QQ机器人管理器";
-            this.Load += new System.EventHandler(this.MainForm_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.TabControl.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(11F, 24F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1121, 679);
+            Controls.Add(CloseButton);
+            Controls.Add(StartButton);
+            Controls.Add(label1);
+            Controls.Add(TabControl);
+            Controls.Add(richTextBox1);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
+            Margin = new Padding(4, 4, 4, 4);
+            Name = "MainForm";
+            Text = "QQ机器人管理器";
+            FormClosed += MainForm_FormClosed;
+            Load += MainForm_Load;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            TabControl.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

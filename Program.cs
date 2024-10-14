@@ -16,7 +16,7 @@ namespace gocqhttp_CSharp
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             MainForm mainForm = new MainForm();
-            Log.SetOutDomain(mainForm);
+            TextLog.SetOutDomain(mainForm);
             //初始化
             Gocqhttp.Init(Init);
             Application.Run(mainForm);
@@ -29,7 +29,7 @@ namespace gocqhttp_CSharp
             }
             catch (FunctionIsRegisteredException ex)
             {
-                Log.Warn($"功能：“{ex.Message}”无法注册，因为该功能名或响应条件已注册");
+                TextLog.Warn($"功能：“{ex.Message}”无法注册，因为该功能名或响应条件已注册");
             }
         }
     }
