@@ -15,5 +15,40 @@
       "message",
       "auto_escape"
     ]
+  },
+  {
+    "name": "get_login_info",
+    "params": [
+    ]
+  },
+  {
+    "name": "set_qq_profile",
+    "params": [
+      "nickname",
+      "company",
+      "email",
+      "college",
+      "personal_note"
+    ]
+  },
+  {
+    "name": "_set_model_show",
+    "params": [
+      "model",
+      "model_show"
+    ]
+  },
+  {
+    "name": "get_online_clients",
+    "params": [
+      "no_cache"
+    ]
+  },
+  {
+    "name": "get_stranger_info",
+    "params": [
+      "user_id",
+      "no_cache"
+    ]
   }
 ] 

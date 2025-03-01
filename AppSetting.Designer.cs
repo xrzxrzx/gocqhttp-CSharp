@@ -12,7 +12,7 @@ namespace gocqhttp_CSharp {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.10.0.0")]
     internal sealed partial class AppSetting : global::System.Configuration.ApplicationSettingsBase {
         
         private static AppSetting defaultInstance = ((AppSetting)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new AppSetting())));
@@ -25,7 +25,7 @@ namespace gocqhttp_CSharp {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.0.0.0")]
         public string IP {
             get {
                 return ((string)(this["IP"]));
@@ -37,13 +37,73 @@ namespace gocqhttp_CSharp {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8080")]
+        [global::System.Configuration.DefaultSettingValueAttribute("3001")]
         public int Port {
             get {
                 return ((int)(this["Port"]));
             }
             set {
                 this["Port"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConfigFilePath {
+            get {
+                return ((string)(this["ConfigFilePath"]));
+            }
+            set {
+                this["ConfigFilePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string APIFilePath {
+            get {
+                return ((string)(this["APIFilePath"]));
+            }
+            set {
+                this["APIFilePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3406515483")]
+        public uint RobotID {
+            get {
+                return ((uint)(this["RobotID"]));
+            }
+            set {
+                this["RobotID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("小爱衣")]
+        public string RobotName {
+            get {
+                return ((string)(this["RobotName"]));
+            }
+            set {
+                this["RobotName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Xrz!535a00110110")]
+        public string RobotPwd {
+            get {
+                return ((string)(this["RobotPwd"]));
+            }
+            set {
+                this["RobotPwd"] = value;
             }
         }
     }

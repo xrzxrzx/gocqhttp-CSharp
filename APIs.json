@@ -1,0 +1,69 @@
+[
+  {
+    "Name": "send_private_msg",
+    "Params": [
+      "user_id",
+      "message"
+    ]
+  },
+  {
+    "Name": "send_group_msg",
+    "Params": [
+      "group_id",
+      "message"
+    ]
+  },
+  {
+    "Name": "get_msg",
+    "Params": [
+      "message_id"
+    ]
+  },
+  {
+    "Name": "delete_msg",
+    "Params": [
+      "message_id"
+    ]
+  },
+  {
+    "Name": "get_group_info",
+    "Params": [
+      "group_id"
+    ]
+  },
+  {
+    "Name": "get_group_member_info",
+    "Params": [
+      "group_id",
+      "user_id"
+    ]
+  },
+  {
+    "Name": "get_group_member_list",
+    "Params": [
+      "group_id"
+    ]
+  },
+  {
+    "Name": "set_group_ban",
+    "Params": [
+      "group_id",
+      "user_id",
+      "duration"
+    ]
+  },
+  {
+    "Name": "set_group_whole_ban",
+    "Params": [
+      "group_id",
+      "enable"
+    ]
+  },
+  {
+    "Name": "set_group_kick",
+    "Params": [
+      "group_id",
+      "user_id"
+    ]
+  }
+]
