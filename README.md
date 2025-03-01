@@ -1,4 +1,4 @@
-﻿# gocqhttp-CSharp
+# gocqhttp-CSharp
 
 gocqhttp-CSharp 是一个使用 C# 编写的 QQ 机器人客户端，基于 gocqhttp 实现。
 
