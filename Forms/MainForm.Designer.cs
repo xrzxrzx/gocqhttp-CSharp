@@ -37,13 +37,17 @@
             richTextBox1 = new RichTextBox();
             TabControl = new TabControl();
             FunctionPage = new TabPage();
+            button2 = new Button();
+            button1 = new Button();
             QQPage = new TabPage();
             RobotPage = new TabPage();
             label1 = new Label();
             StartButton = new Button();
             CloseButton = new Button();
+            clearButton = new Button();
             menuStrip1.SuspendLayout();
             TabControl.SuspendLayout();
+            FunctionPage.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -93,7 +97,7 @@
             // richTextBox1
             // 
             richTextBox1.Location = new Point(15, 72);
-            richTextBox1.Margin = new Padding(4, 4, 4, 4);
+            richTextBox1.Margin = new Padding(4);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.Size = new Size(795, 508);
             richTextBox1.TabIndex = 1;
@@ -105,7 +109,7 @@
             TabControl.Controls.Add(QQPage);
             TabControl.Controls.Add(RobotPage);
             TabControl.Location = new Point(818, 52);
-            TabControl.Margin = new Padding(4, 4, 4, 4);
+            TabControl.Margin = new Padding(4);
             TabControl.Name = "TabControl";
             TabControl.SelectedIndex = 0;
             TabControl.Size = new Size(288, 613);
@@ -113,21 +117,43 @@
             // 
             // FunctionPage
             // 
+            FunctionPage.Controls.Add(button2);
+            FunctionPage.Controls.Add(button1);
             FunctionPage.Location = new Point(4, 33);
-            FunctionPage.Margin = new Padding(4, 4, 4, 4);
+            FunctionPage.Margin = new Padding(4);
             FunctionPage.Name = "FunctionPage";
-            FunctionPage.Padding = new Padding(4, 4, 4, 4);
+            FunctionPage.Padding = new Padding(4);
             FunctionPage.Size = new Size(280, 576);
             FunctionPage.TabIndex = 0;
             FunctionPage.Text = "基本功能";
             FunctionPage.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            button2.Location = new Point(154, 17);
+            button2.Name = "button2";
+            button2.Size = new Size(100, 50);
+            button2.TabIndex = 1;
+            button2.Text = "button2";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(23, 17);
+            button1.Name = "button1";
+            button1.Size = new Size(100, 50);
+            button1.TabIndex = 0;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // QQPage
             // 
             QQPage.Location = new Point(4, 33);
-            QQPage.Margin = new Padding(4, 4, 4, 4);
+            QQPage.Margin = new Padding(4);
             QQPage.Name = "QQPage";
-            QQPage.Padding = new Padding(4, 4, 4, 4);
+            QQPage.Padding = new Padding(4);
             QQPage.Size = new Size(280, 576);
             QQPage.TabIndex = 1;
             QQPage.Text = "QQ功能";
@@ -136,7 +162,7 @@
             // RobotPage
             // 
             RobotPage.Location = new Point(4, 33);
-            RobotPage.Margin = new Padding(4, 4, 4, 4);
+            RobotPage.Margin = new Padding(4);
             RobotPage.Name = "RobotPage";
             RobotPage.Size = new Size(280, 576);
             RobotPage.TabIndex = 2;
@@ -155,8 +181,8 @@
             // 
             // StartButton
             // 
-            StartButton.Location = new Point(103, 593);
-            StartButton.Margin = new Padding(4, 4, 4, 4);
+            StartButton.Location = new Point(78, 594);
+            StartButton.Margin = new Padding(4);
             StartButton.Name = "StartButton";
             StartButton.Size = new Size(167, 72);
             StartButton.TabIndex = 4;
@@ -166,8 +192,8 @@
             // 
             // CloseButton
             // 
-            CloseButton.Location = new Point(489, 593);
-            CloseButton.Margin = new Padding(4, 4, 4, 4);
+            CloseButton.Location = new Point(533, 594);
+            CloseButton.Margin = new Padding(4);
             CloseButton.Name = "CloseButton";
             CloseButton.Size = new Size(167, 72);
             CloseButton.TabIndex = 5;
@@ -175,11 +201,23 @@
             CloseButton.UseVisualStyleBackColor = true;
             CloseButton.Click += CloseButton_Click;
             // 
+            // clearButton
+            // 
+            clearButton.Location = new Point(305, 594);
+            clearButton.Margin = new Padding(4);
+            clearButton.Name = "clearButton";
+            clearButton.Size = new Size(167, 72);
+            clearButton.TabIndex = 6;
+            clearButton.Text = "清屏";
+            clearButton.UseVisualStyleBackColor = true;
+            clearButton.Click += clearButton_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(11F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1121, 679);
+            Controls.Add(clearButton);
             Controls.Add(CloseButton);
             Controls.Add(StartButton);
             Controls.Add(label1);
@@ -187,7 +225,7 @@
             Controls.Add(richTextBox1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "MainForm";
             Text = "QQ机器人管理器";
             FormClosed += MainForm_FormClosed;
@@ -195,6 +233,7 @@
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             TabControl.ResumeLayout(false);
+            FunctionPage.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -215,5 +254,8 @@
         private TabPage RobotPage;
         private Button StartButton;
         private Button CloseButton;
+        private Button clearButton;
+        private Button button1;
+        private Button button2;
     }
 }

@@ -11,7 +11,7 @@
     <Setting Name="ConfigFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="GocqhttpFilePath" Type="System.String" Scope="User">
+    <Setting Name="APIFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="RobotID" Type="System.UInt32" Scope="User">

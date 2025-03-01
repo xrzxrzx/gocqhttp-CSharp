@@ -39,15 +39,20 @@ namespace gocqhttp_CSharp.gocqhttp
         /// </summary>
         /// <exception cref="FileNotFoundException">未找到API文件</exception>
         /// <exception cref="ArgumentNullException">读取API文件出现异常</exception>
-        private void LoadAPIFile()
+        public void LoadAPIFile()
         {
             APINode[]? APINodes;
             StreamReader APIFile;
             string jsonString;
 
+            AppSetting setting = new AppSetting();
+            setting.Reload();
+            operater.APIFilePath = setting.APIFilePath;
+
             if(!File.Exists(operater.APIFilePath))
             {
-                throw new FileNotFoundException(operater.APIFilePath);
+                return;
+                //throw new FileNotFoundException(operater.APIFilePath);
             }
             APIFile = new StreamReader(operater.APIFilePath);
             jsonString = APIFile.ReadToEnd();
@@ -76,10 +81,14 @@ namespace gocqhttp_CSharp.gocqhttp
             ManualResetEvent manualResetEvent= new ManualResetEvent(false);
             string sendString;
             JObject? recvData;
+            JObject sendData = new JObject();
             List<string> APIParams;
-            API_JSON json = new API_JSON(name);
+
+            sendData["action"] = name;
 
             //添加参数（包括值）
+            JObject paramsData = new JObject();
+
             if(APIs.ContainsKey(name))
             {
                 APIParams = APIs[name];
@@ -90,20 +99,25 @@ namespace gocqhttp_CSharp.gocqhttp
                 int i = 0;
                 foreach (string param in APIParams)
                 {
-                    while(i < values.Length)
-                    {
-                        json.Add(new API_Param(param, values[i++]));
-                    }
+                    if (values[i] is string)
+                        paramsData.Add(param, (string)values[i++]);
+                    else if (values[i] is uint)
+                        paramsData.Add(param, (uint)values[i++]);
+                    else
+                        paramsData.Add(param, (int)values[i++]);
                 }
             }
             else
             {
                 TextLog.Warn("未知API");
+                return null;
             }
-            
+
+            sendData["params"] = paramsData;
+            sendData["echo"] = Gocqhttp.GetEcho(manualResetEvent);
+
             //转换成JSON字符串
-            json.Echo = Gocqhttp.GetEcho(manualResetEvent);
-            sendString = JsonConvert.SerializeObject(json);
+            sendString = JsonConvert.SerializeObject(sendData);
 
             operater.SendMessage(sendString);//发送
             //休眠（至多3秒），并等待被唤醒
@@ -132,27 +146,27 @@ namespace gocqhttp_CSharp.gocqhttp
         /// </summary>
         public class API_JSON
         {
-            private string action;
-            private List<API_Param> @params;
+            public string action;
+            public List<API_Param<dynamic>> @params;
             public API_JSON(string action)
             {
-                @params= new List<API_Param>();
+                @params= new List<API_Param<dynamic>>();
                 this.action = action;
             }
             public string? Echo { set; get; }
-            public void Add(API_Param param) => @params.Add(param);
-            public List<API_Param> GetParams() => @params;
+            public void Add(API_Param<dynamic> param) => @params.Add(param);
+            public List<API_Param<dynamic>> GetParams() => @params;
         }
         /// <summary>
         /// gocqhttp API的参数和值
         /// </summary>
-        public class API_Param
+        public class API_Param<T>
         {
             private string name;
-            private object value;
+            private T value;
             public string Name { get => name; set => name = value == null ? "None" : value; }
-            public object Value { get => value; set => this.value = value == null ? "None" : value; }
-            public API_Param(string name, object value)
+            public T Value { get => value; set => this.value = value; }
+            public API_Param(string name, T value)
             {
                 this.name = name;
                 this.value = value;

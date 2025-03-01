@@ -28,240 +28,261 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.ConfigFileText = new System.Windows.Forms.TextBox();
-            this.GocqhttpFileText = new System.Windows.Forms.TextBox();
-            this.SelectConfigButton = new System.Windows.Forms.Button();
-            this.SelectGocqhttpButton = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.SocketIPText = new System.Windows.Forms.TextBox();
-            this.SocketPortText = new System.Windows.Forms.TextBox();
-            this.RobotPwdText = new System.Windows.Forms.TextBox();
-            this.RobotQQText = new System.Windows.Forms.TextBox();
-            this.RobotNameText = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.LoadConfigButtton = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            this.SuspendLayout();
+            label1 = new Label();
+            label2 = new Label();
+            ConfigFileText = new TextBox();
+            GocqhttpFileText = new TextBox();
+            SelectConfigButton = new Button();
+            SelectGocqhttpButton = new Button();
+            groupBox1 = new GroupBox();
+            SocketIPText = new TextBox();
+            SocketPortText = new TextBox();
+            RobotPwdText = new TextBox();
+            RobotQQText = new TextBox();
+            RobotNameText = new TextBox();
+            label7 = new Label();
+            label6 = new Label();
+            label5 = new Label();
+            label4 = new Label();
+            LoadConfigButtton = new Button();
+            label3 = new Label();
+            button1 = new Button();
+            button2 = new Button();
+            groupBox1.SuspendLayout();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(115, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "config.yml文件";
+            label1.AutoSize = true;
+            label1.Location = new Point(15, 11);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(136, 24);
+            label1.TabIndex = 0;
+            label1.Text = "config.yml文件";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 40);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(138, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "gocqhttp.exe文件";
+            label2.AutoSize = true;
+            label2.Location = new Point(15, 48);
+            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(75, 24);
+            label2.TabIndex = 1;
+            label2.Text = "API文件";
             // 
             // ConfigFileText
             // 
-            this.ConfigFileText.AllowDrop = true;
-            this.ConfigFileText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ConfigFileText.Location = new System.Drawing.Point(156, 6);
-            this.ConfigFileText.Name = "ConfigFileText";
-            this.ConfigFileText.ReadOnly = true;
-            this.ConfigFileText.Size = new System.Drawing.Size(534, 27);
-            this.ConfigFileText.TabIndex = 2;
+            ConfigFileText.AllowDrop = true;
+            ConfigFileText.BorderStyle = BorderStyle.FixedSingle;
+            ConfigFileText.Location = new Point(191, 7);
+            ConfigFileText.Margin = new Padding(4, 4, 4, 4);
+            ConfigFileText.Name = "ConfigFileText";
+            ConfigFileText.ReadOnly = true;
+            ConfigFileText.Size = new Size(652, 30);
+            ConfigFileText.TabIndex = 2;
             // 
             // GocqhttpFileText
             // 
-            this.GocqhttpFileText.AllowDrop = true;
-            this.GocqhttpFileText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.GocqhttpFileText.Location = new System.Drawing.Point(156, 40);
-            this.GocqhttpFileText.Name = "GocqhttpFileText";
-            this.GocqhttpFileText.ReadOnly = true;
-            this.GocqhttpFileText.Size = new System.Drawing.Size(534, 27);
-            this.GocqhttpFileText.TabIndex = 3;
+            GocqhttpFileText.AllowDrop = true;
+            GocqhttpFileText.BorderStyle = BorderStyle.FixedSingle;
+            GocqhttpFileText.Location = new Point(191, 48);
+            GocqhttpFileText.Margin = new Padding(4, 4, 4, 4);
+            GocqhttpFileText.Name = "GocqhttpFileText";
+            GocqhttpFileText.ReadOnly = true;
+            GocqhttpFileText.Size = new Size(652, 30);
+            GocqhttpFileText.TabIndex = 3;
             // 
             // SelectConfigButton
             // 
-            this.SelectConfigButton.Location = new System.Drawing.Point(694, 6);
-            this.SelectConfigButton.Name = "SelectConfigButton";
-            this.SelectConfigButton.Size = new System.Drawing.Size(94, 27);
-            this.SelectConfigButton.TabIndex = 4;
-            this.SelectConfigButton.Text = "选择文件";
-            this.SelectConfigButton.UseVisualStyleBackColor = true;
-            this.SelectConfigButton.Click += new System.EventHandler(this.SelectConfigButton_Click);
+            SelectConfigButton.Location = new Point(848, 7);
+            SelectConfigButton.Margin = new Padding(4, 4, 4, 4);
+            SelectConfigButton.Name = "SelectConfigButton";
+            SelectConfigButton.Size = new Size(115, 32);
+            SelectConfigButton.TabIndex = 4;
+            SelectConfigButton.Text = "选择文件";
+            SelectConfigButton.UseVisualStyleBackColor = true;
+            SelectConfigButton.Click += SelectConfigButton_Click;
             // 
             // SelectGocqhttpButton
             // 
-            this.SelectGocqhttpButton.Location = new System.Drawing.Point(694, 39);
-            this.SelectGocqhttpButton.Name = "SelectGocqhttpButton";
-            this.SelectGocqhttpButton.Size = new System.Drawing.Size(94, 27);
-            this.SelectGocqhttpButton.TabIndex = 5;
-            this.SelectGocqhttpButton.Text = "选择文件";
-            this.SelectGocqhttpButton.UseVisualStyleBackColor = true;
-            this.SelectGocqhttpButton.Click += new System.EventHandler(this.SelectGocqhttpButton_Click);
+            SelectGocqhttpButton.Location = new Point(848, 47);
+            SelectGocqhttpButton.Margin = new Padding(4, 4, 4, 4);
+            SelectGocqhttpButton.Name = "SelectGocqhttpButton";
+            SelectGocqhttpButton.Size = new Size(115, 32);
+            SelectGocqhttpButton.TabIndex = 5;
+            SelectGocqhttpButton.Text = "选择文件";
+            SelectGocqhttpButton.UseVisualStyleBackColor = true;
+            SelectGocqhttpButton.Click += SelectGocqhttpButton_Click;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.SocketIPText);
-            this.groupBox1.Controls.Add(this.SocketPortText);
-            this.groupBox1.Controls.Add(this.RobotPwdText);
-            this.groupBox1.Controls.Add(this.RobotQQText);
-            this.groupBox1.Controls.Add(this.RobotNameText);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.LoadConfigButtton);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Location = new System.Drawing.Point(12, 90);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(776, 282);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "基本信息";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            groupBox1.Controls.Add(SocketIPText);
+            groupBox1.Controls.Add(SocketPortText);
+            groupBox1.Controls.Add(RobotPwdText);
+            groupBox1.Controls.Add(RobotQQText);
+            groupBox1.Controls.Add(RobotNameText);
+            groupBox1.Controls.Add(label7);
+            groupBox1.Controls.Add(label6);
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(label4);
+            groupBox1.Controls.Add(LoadConfigButtton);
+            groupBox1.Controls.Add(label3);
+            groupBox1.Location = new Point(15, 108);
+            groupBox1.Margin = new Padding(4, 4, 4, 4);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(4, 4, 4, 4);
+            groupBox1.Size = new Size(948, 338);
+            groupBox1.TabIndex = 6;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "基本信息";
+            groupBox1.Enter += groupBox1_Enter;
             // 
             // SocketIPText
             // 
-            this.SocketIPText.Location = new System.Drawing.Point(203, 184);
-            this.SocketIPText.Name = "SocketIPText";
-            this.SocketIPText.Size = new System.Drawing.Size(195, 27);
-            this.SocketIPText.TabIndex = 10;
+            SocketIPText.Location = new Point(248, 221);
+            SocketIPText.Margin = new Padding(4, 4, 4, 4);
+            SocketIPText.Name = "SocketIPText";
+            SocketIPText.Size = new Size(237, 30);
+            SocketIPText.TabIndex = 10;
             // 
             // SocketPortText
             // 
-            this.SocketPortText.Location = new System.Drawing.Point(537, 184);
-            this.SocketPortText.Name = "SocketPortText";
-            this.SocketPortText.Size = new System.Drawing.Size(93, 27);
-            this.SocketPortText.TabIndex = 9;
+            SocketPortText.Location = new Point(656, 221);
+            SocketPortText.Margin = new Padding(4, 4, 4, 4);
+            SocketPortText.Name = "SocketPortText";
+            SocketPortText.Size = new Size(113, 30);
+            SocketPortText.TabIndex = 9;
             // 
             // RobotPwdText
             // 
-            this.RobotPwdText.Location = new System.Drawing.Point(522, 102);
-            this.RobotPwdText.Name = "RobotPwdText";
-            this.RobotPwdText.Size = new System.Drawing.Size(217, 27);
-            this.RobotPwdText.TabIndex = 8;
+            RobotPwdText.Location = new Point(638, 122);
+            RobotPwdText.Margin = new Padding(4, 4, 4, 4);
+            RobotPwdText.Name = "RobotPwdText";
+            RobotPwdText.Size = new Size(264, 30);
+            RobotPwdText.TabIndex = 8;
             // 
             // RobotQQText
             // 
-            this.RobotQQText.Location = new System.Drawing.Point(203, 105);
-            this.RobotQQText.Name = "RobotQQText";
-            this.RobotQQText.Size = new System.Drawing.Size(195, 27);
-            this.RobotQQText.TabIndex = 7;
+            RobotQQText.Location = new Point(248, 126);
+            RobotQQText.Margin = new Padding(4, 4, 4, 4);
+            RobotQQText.Name = "RobotQQText";
+            RobotQQText.Size = new Size(237, 30);
+            RobotQQText.TabIndex = 7;
             // 
             // RobotNameText
             // 
-            this.RobotNameText.Location = new System.Drawing.Point(315, 26);
-            this.RobotNameText.Name = "RobotNameText";
-            this.RobotNameText.Size = new System.Drawing.Size(223, 27);
-            this.RobotNameText.TabIndex = 6;
+            RobotNameText.Location = new Point(385, 31);
+            RobotNameText.Margin = new Padding(4, 4, 4, 4);
+            RobotNameText.Name = "RobotNameText";
+            RobotNameText.Size = new Size(272, 30);
+            RobotNameText.TabIndex = 6;
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(404, 187);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(127, 20);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "WebSocket 端口";
+            label7.AutoSize = true;
+            label7.Location = new Point(494, 224);
+            label7.Margin = new Padding(4, 0, 4, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(148, 24);
+            label7.TabIndex = 5;
+            label7.Text = "WebSocket 端口";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(46, 187);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(140, 20);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "WebSocket IP地址";
+            label6.AutoSize = true;
+            label6.Location = new Point(56, 224);
+            label6.Margin = new Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(164, 24);
+            label6.TabIndex = 4;
+            label6.Text = "WebSocket IP地址";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(404, 105);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(108, 20);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "机器人QQ密码";
+            label5.AutoSize = true;
+            label5.Location = new Point(494, 126);
+            label5.Margin = new Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(130, 24);
+            label5.TabIndex = 3;
+            label5.Text = "机器人QQ密码";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(93, 105);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 20);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "机器人QQ号";
+            label4.AutoSize = true;
+            label4.Location = new Point(114, 126);
+            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(112, 24);
+            label4.TabIndex = 2;
+            label4.Text = "机器人QQ号";
             // 
             // LoadConfigButtton
             // 
-            this.LoadConfigButtton.Location = new System.Drawing.Point(315, 236);
-            this.LoadConfigButtton.Name = "LoadConfigButtton";
-            this.LoadConfigButtton.Size = new System.Drawing.Size(166, 40);
-            this.LoadConfigButtton.TabIndex = 1;
-            this.LoadConfigButtton.Text = "从配置文件中获取";
-            this.LoadConfigButtton.UseVisualStyleBackColor = true;
-            this.LoadConfigButtton.Click += new System.EventHandler(this.LoadConfigButtton_Click);
+            LoadConfigButtton.Location = new Point(385, 283);
+            LoadConfigButtton.Margin = new Padding(4, 4, 4, 4);
+            LoadConfigButtton.Name = "LoadConfigButtton";
+            LoadConfigButtton.Size = new Size(203, 48);
+            LoadConfigButtton.TabIndex = 1;
+            LoadConfigButtton.Text = "从配置文件中获取";
+            LoadConfigButtton.UseVisualStyleBackColor = true;
+            LoadConfigButtton.Click += LoadConfigButtton_Click;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(225, 29);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 20);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "机器人呢称";
+            label3.AutoSize = true;
+            label3.Location = new Point(275, 35);
+            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(100, 24);
+            label3.TabIndex = 0;
+            label3.Text = "机器人呢称";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(463, 378);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(143, 60);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "保存";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Location = new Point(566, 454);
+            button1.Margin = new Padding(4, 4, 4, 4);
+            button1.Name = "button1";
+            button1.Size = new Size(175, 72);
+            button1.TabIndex = 1;
+            button1.Text = "保存";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(242, 378);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(143, 60);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "取消";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            button2.Location = new Point(296, 454);
+            button2.Margin = new Padding(4, 4, 4, 4);
+            button2.Name = "button2";
+            button2.Size = new Size(175, 72);
+            button2.TabIndex = 7;
+            button2.Text = "取消";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // RobotSettingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.SelectGocqhttpButton);
-            this.Controls.Add(this.SelectConfigButton);
-            this.Controls.Add(this.GocqhttpFileText);
-            this.Controls.Add(this.ConfigFileText);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Name = "RobotSettingForm";
-            this.Text = "机器人设置";
-            this.Load += new System.EventHandler(this.RobotSettingForm_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(11F, 24F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(978, 540);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(groupBox1);
+            Controls.Add(SelectGocqhttpButton);
+            Controls.Add(SelectConfigButton);
+            Controls.Add(GocqhttpFileText);
+            Controls.Add(ConfigFileText);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Margin = new Padding(4, 4, 4, 4);
+            Name = "RobotSettingForm";
+            Text = "机器人设置";
+            Load += RobotSettingForm_Load;
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

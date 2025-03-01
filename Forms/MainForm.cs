@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using gocqhttp_CSharp.gocqhttp;
 using gocqhttp_CSharp.Forms;
 using gocqhttp_CSharp.common;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace gocqhttp_CSharp.Forms
 {
@@ -68,6 +69,32 @@ namespace gocqhttp_CSharp.Forms
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Gocqhttp.Stop();
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            lock (richTextBox1)
+            {
+                richTextBox1.Text = string.Empty;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                var data = Gocqhttp.Send("send_private_msg", 3406515483, "test");
+                TextLog.Info($"{data?.ToString()}");
+            });
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                var data = Gocqhttp.Send("send_group_msg", 434807438, "test");
+                TextLog.Info($"{data?.ToString()}");
+            });
         }
     }
 }

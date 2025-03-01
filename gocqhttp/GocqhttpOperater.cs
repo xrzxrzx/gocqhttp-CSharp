@@ -9,32 +9,34 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Net.Sockets;
 using System.Net;
-using WebSocketSharp.Server;
 using System.Net.WebSockets;
-using WebSocketSharp.Net.WebSockets;
-using WebSocketSharp;
+using System.ComponentModel;
+using System.Security;
 
 namespace gocqhttp_CSharp.gocqhttp
 {
-    class GocqhttpOperater : WebSocketBehavior
+    class GocqhttpOperater
     {
-        private WebSocketServer server;
+        private ClientWebSocket client;
+        private Uri serverAddress;
         private string? ApiFilePath = null;
         private AppSetting setting;
         private static MessageArriveHandler? messageArrive = null;
+        private Task task;
 
         public delegate void MessageArriveHandler(string message);
 
         public GocqhttpOperater()
         {
             setting = new AppSetting();
+
             TextLog.Info("读取配置文件");
             setting.Reload();
+            ApiFilePath = setting.APIFilePath;
+
+            client = new();
             TextLog.Info($"IP: {setting.IP}   Port: {setting.Port}");
-            server = new("ws://" + setting.IP + ":" + setting.Port.ToString());
-            TextLog.Info($"Server: ws://{setting.IP}:{setting.Port.ToString()}");
-            server.AddWebSocketService<GocqhttpOperater>("/");
-            
+            TextLog.Info("server：" + "ws://" + setting.IP + ":" + setting.Port.ToString());
         }
         public void SetWebsocket(MessageArriveHandler messageArrive)
         {
@@ -46,51 +48,77 @@ namespace gocqhttp_CSharp.gocqhttp
             get { return ApiFilePath; }
             set { ApiFilePath = value; }
         }
-        /// <summary>
-        /// 开启反向ws服务
-        /// </summary>
-        public void Start() => server.Start();
-        /// <summary>
-        /// 向gocqhttp发送数据
-        /// </summary>
-        /// <param name="message"></param>
-        public void SendMessage(string message) => this.Send(message);
-        /// <summary>
-        /// 断开与gocqhttp的连接
-        /// </summary>
-        public void Close() => server.Stop();
 
-        protected override void OnOpen()
+        /// <summary>
+        /// 开始连接ws服务端
+        /// </summary>
+        public async void Start()
         {
-            base.OnOpen();
-            TextLog.Info("已连接");
-        }
-
-        protected override void OnMessage(MessageEventArgs e)
-        {
-            base.OnMessage(e);
-            TextLog.Info("收到消息");
+            setting.Reload();
+            if (setting.APIFilePath == null)
+            {
+                TextLog.Info("未设置API文件位置");
+            }
             if (messageArrive == null)
             {
-                TextLog.Error("消息接收处理方法为空");
+                TextLog.Error("未设置消息接收方法");
             }
             else
             {
-                messageArrive(e.Data);
+                serverAddress = new Uri("ws://" + setting.IP + ":" + setting.Port.ToString());
+                await client.ConnectAsync(serverAddress, CancellationToken.None);
+                TextLog.Info("已连接");
+                Action action = new Action(ReceivedMessage);
+                task = Task.Run(action);
             }
         }
-
-        protected override void OnClose(CloseEventArgs e)
+        /// <summary>
+        /// 关闭与ws服务端的连接
+        /// </summary>
+        public void Close()
         {
-            base.OnClose(e);
-            TextLog.Info(e.Reason);
-            TextLog.Info("连接关闭");
+            if(client.CloseStatus == 0)
+            {
+                client.CloseAsync(WebSocketCloseStatus.NormalClosure, string.Empty, CancellationToken.None);
+                task.Dispose();
+                TextLog.Info("已断开连接");
+            }
         }
-
-        protected override void OnError(WebSocketSharp.ErrorEventArgs e)
+        /// <summary>
+        /// 向gocqhttp发送数据
+        /// </summary>
+        /// <param name="message">要发送的消息</param>
+        public async void SendMessage(string message)
         {
-            base.OnError(e);
-            TextLog.Error(e.Message);
+            byte[] messageByte = Encoding.UTF8.GetBytes(message);
+            await client.SendAsync(messageByte, WebSocketMessageType.Text, true, CancellationToken.None);
+        }
+        
+        private async void ReceivedMessage()
+        {
+            while (client.State == WebSocketState.Open)
+            {
+                byte[] buffer = new byte[5000];
+                WebSocketReceiveResult result = await client.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+
+                if (result.MessageType == WebSocketMessageType.Text)
+                {
+                    string receivedMessage = Encoding.UTF8.GetString(buffer, 0, result.Count);
+                    if (messageArrive == null)
+                    {
+                        TextLog.Error("消息处理方法为空");
+                    }
+                    else
+                    {
+                        messageArrive(receivedMessage);
+                    }
+                }
+                else if(result.MessageType == WebSocketMessageType.Close)
+                {
+                    TextLog.Info("接收到断开连接消息。");
+                    Close();
+                }
+            }
         }
     }
 }

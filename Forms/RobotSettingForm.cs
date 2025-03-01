@@ -42,11 +42,11 @@ namespace gocqhttp_CSharp.Forms
         {
             setting.Reload();
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "go-cqhttp.exe文件(*.exe)|go-cqhttp.exe";
+            dialog.Filter = "API文件(*.json)|APIs.json";
             if(dialog.ShowDialog() == DialogResult.OK)
             {
                 GocqhttpFileText.Text = dialog.FileName;
-                setting.GocqhttpFilePath= dialog.FileName;
+                setting.APIFilePath= dialog.FileName;
             }
             setting.Save();
         }
@@ -55,7 +55,7 @@ namespace gocqhttp_CSharp.Forms
             setting.Reload();
             #region 控件初始化
             ConfigFileText.Text = setting.ConfigFilePath;
-            GocqhttpFileText.Text= setting.GocqhttpFilePath;
+            GocqhttpFileText.Text= setting.APIFilePath;
             RobotNameText.Text = setting.RobotName;
             RobotPwdText.Text = setting.RobotPwd;
             RobotQQText.Text = setting.RobotID.ToString();
@@ -79,6 +79,7 @@ namespace gocqhttp_CSharp.Forms
             setting.RobotPwd = RobotPwdText.Text;
             setting.IP = SocketIPText.Text;
             setting.Port = int.Parse(SocketPortText.Text);
+            
             setting.Save();
             MessageBox.Show("已保存！");
         }

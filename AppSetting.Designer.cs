@@ -62,12 +62,12 @@ namespace gocqhttp_CSharp {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string GocqhttpFilePath {
+        public string APIFilePath {
             get {
-                return ((string)(this["GocqhttpFilePath"]));
+                return ((string)(this["APIFilePath"]));
             }
             set {
-                this["GocqhttpFilePath"] = value;
+                this["APIFilePath"] = value;
             }
         }
         
