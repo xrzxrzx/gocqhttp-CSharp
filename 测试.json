@@ -1,0 +1,27 @@
+{
+	"self_id": 3406515483,
+	"user_id": 2871831294,
+	"time": 1729773813,
+	"message_id": 1009928927,
+	"message_seq": 1009928927,
+	"real_id": 1009928927,
+	"message_type": "private",
+	"sender": {
+		"user_id": 2871831294,
+		"nickname": "爱衣",
+		"card": ""
+	},
+	"raw_message": "测试",
+	"font": 14,
+	"sub_type": "friend",
+	"message": [
+		{
+			"type": "text",
+			"data": {
+				"text": "测试"
+			}
+		}
+	],
+	"message_format": "array",
+	"post_type": "message"
+}
